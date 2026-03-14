@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from "react-icons/fa"
-// import useCountriesFunctionalities from '../../hooks/coutriesFunctionalities';
+import useCountriesFunctionalities from '../../hooks/coutriesFunctionalities';
 import { useCountries } from '../../CountryContext/countrycontext';
 
 const CountryDetail = () => {
@@ -15,7 +15,7 @@ const CountryDetail = () => {
     const currencyList = Object.values(currencies || {}).map(c => c.name).join(', ');
     const languageList = Object.values(languages || {}).join(', ');
     
-    // const {handleClick} = useCountriesFunctionalities()
+    const {handleClick} = useCountriesFunctionalities()
 
   return (
     <div className="bg-white min-h-screen text-gray-900 px-10 py-12 font-sans">
@@ -70,38 +70,7 @@ const CountryDetail = () => {
                   className="px-6 py-1 bg-white shadow-[0_0_4px_rgba(0,0,0,0.1)] border border-gray-100 rounded-sm text-xs cursor-pointer"
                   onClick={() => {
                     const pickborder = countries.find((element) => element.name.common === country)
-                    // border country might also have borders, fetch them too
-                    if (pickborder.borders?.length > 0) {
-                        const codes = pickborder.borders.join(',');
-                        fetch(`https://restcountries.com/v3.1/alpha?codes=${codes}&fields=name,cca3`)
-                            .then(res => res.json())
-                            .then(borderData => {
-                                navigate("/detail", {
-                                    state: {
-                                        flag: pickborder.flags.svg,
-                                        alt: pickborder.flags.alt,
-                                        name: pickborder.name.common,
-                                        nativename: pickborder.name.nativeName,
-                                        population: pickborder.population,
-                                        region: pickborder.region,
-                                        subRegion: pickborder.subregion,
-                                        capital: pickborder.capital,
-                                        topLevelDomain: pickborder.tld,
-                                        currencies: pickborder.currencies,
-                                        languages: pickborder.languages,
-                                        borderCountries: borderData.map(b => b.name.common) // ✅ added
-                                    }
-                                })
-                            })
-                    } else {
-                        navigate("/detail", {
-                            state: {
-                                flag: pickborder.flags.svg,
-                                // ...other fields
-                                borderCountries: null // ✅ added
-                            }
-                        })
-                    }
+                    handleClick(pickborder)
                   }}
                 >
                   {country}
