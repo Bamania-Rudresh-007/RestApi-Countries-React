@@ -2,7 +2,7 @@ import React from 'react'
 import { FaSearch } from "react-icons/fa"
 function SearchFilter() {
   return (
-    <div className='flex justify-between items-center px-15 py-7'>
+    <div className='flex justify-between items-center px-15 py-7 '>
         <div className="max-w-md"> {/* Container to control width */}
             <div className="flex items-center gap-3 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500 bg-white">
                 <FaSearch className="text-gray-400" /> 
