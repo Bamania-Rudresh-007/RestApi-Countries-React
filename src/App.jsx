@@ -1,18 +1,13 @@
 import React from 'react'
-import Nav from './components/home/Nav'
-import SearchFilter from './components/home/SearchFilter'
-import Cards from './components/home/Cards';
+import Home from './components/home/Home';
 import CountriesDetail from './components/detail/CountriesDetails';
 
 function App() {
   return (
     <div>
-        {/* <Nav />
-        <SearchFilter />
-        <Cards /> */}
-        <CountriesDetail />
+        <Home />
     </div>
-  )
+  ) 
 }
 
 export default App
