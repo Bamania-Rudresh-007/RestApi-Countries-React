@@ -9,8 +9,6 @@ export function CountryProvider({ children }) {
     const [loading, setLoading] = useState(true);
 
     const API = "https://restcountries.com/v3.1/all?fields=name,capital,region,subregion,flags,currencies,languages,population,borders,tld";
-
-
     useEffect(() => {
        
         fetch(API)
