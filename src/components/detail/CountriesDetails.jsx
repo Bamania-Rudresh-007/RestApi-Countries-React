@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { FaArrowLeft } from "react-icons/fa"
 
 const CountryDetail = () => {
     const location = useLocation()
@@ -17,7 +18,7 @@ const CountryDetail = () => {
       <button className="mb-16 px-8 py-2 bg-white shadow-[0_0_7px_rgba(0,0,0,0.2)] rounded-md flex items-center gap-2 hover:bg-gray-50 transition-colors"
       onClick={() => navigate(-1)}
       >
-        <span className="text-xl">←</span> Back
+        <span className="text-xl"><FaArrowLeft /></span> Back
       </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
