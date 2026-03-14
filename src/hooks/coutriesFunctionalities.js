@@ -1,8 +1,6 @@
 import { useCountries } from "../CountryContext/countrycontext"
 import { useNavigate } from "react-router-dom";
 
-
-
 function useCountriesFunctionalities(){
 
     const {countries} = useCountries()
@@ -10,27 +8,26 @@ function useCountriesFunctionalities(){
 
 
     const handleClick = (country) => {
-        const API = `https://restcountries.com/v3.1/name/${country.name.common}`;
 
-        fetch(API).then((res) => res.json()).then((result) => {
-            const data = result[0];
+        const targetCountry = countries.filter((ele) => ele.name.common == country.name.common)
+
+        console.log(targetCountry)
             navigate("/detail", {
                 state: {
-                    flag: data.flags.svg,
-                    alt: data.flags.alt,
-                    name: data.name.common,
-                    nativename: data.name.nativeName,
-                    population: data.population,
-                    region: data.region,
-                    subRegion: data.subregion,
-                    capital: data.capital,
-                    topLevelDomain: data.tld,
-                    currencies: data.currencies,
-                    languages: data.languages,
-                    borderCountries: data.borders
+                    flag: targetCountry[0].flags.svg,
+                    alt: targetCountry[0].flags.alt,
+                    name: targetCountry[0].name.common,
+                    nativename: targetCountry[0].name.nativeName,
+                    population: targetCountry[0].population,
+                    region: targetCountry[0].region,
+                    subRegion: targetCountry[0].subregion,
+                    capital: targetCountry[0].capital,
+                    topLevelDomain: targetCountry[0].tld,
+                    currencies: targetCountry[0].currencies,
+                    languages: countries.languages,
+                    borderCountries: targetCountry[0].borders
 
                 }
-            })
         })
     }
     return {handleClick}

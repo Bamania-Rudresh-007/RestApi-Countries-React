@@ -1,8 +1,12 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from "react-icons/fa"
+// import useCountriesFunctionalities from '../../hooks/coutriesFunctionalities';
+// import { useCountries } from '../../CountryContext/countrycontext';
 
 const CountryDetail = () => {
+    // const {countries} = useCountries()
+
     const location = useLocation()
     const navigate = useNavigate()
     const {flag,alt,name,nativename,population,region,subRegion,capital,topLevelDomain,currencies,languages, borderCountries} = location.state
@@ -10,15 +14,16 @@ const CountryDetail = () => {
     const nativeName = Object.values(nativename || {})[0]?.common;
     const currencyList = Object.values(currencies || {}).map(c => c.name).join(', ');
     const languageList = Object.values(languages || {}).join(', ');
-
+    
+    // const {handleClick} = useCountriesFunctionalities()
 
   return (
     <div className="bg-white min-h-screen text-gray-900 px-10 py-12 font-sans">
       {/* Back Button */}
-      <button className="mb-16 px-8 py-2 bg-white shadow-[0_0_7px_rgba(0,0,0,0.2)] rounded-md flex items-center gap-2 hover:bg-gray-50 transition-colors"
+      <button className="mb-16 px-8 py-2 bg-white shadow-[0_0_7px_rgba(0,0,0,0.2)] rounded-md flex items-center gap-2 hover:bg-gray-50 transition-colors cursor-pointer"
       onClick={() => navigate(-1)}
       >
-        <span className="text-xl"><FaArrowLeft /></span> Back
+        <span className="text-xl "><FaArrowLeft /></span> Back
       </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
@@ -62,7 +67,10 @@ const CountryDetail = () => {
               {borderCountries ? borderCountries.map((country) => (
                 <span 
                   key={country} 
-                  className="px-6 py-1 bg-white shadow-[0_0_4px_rgba(0,0,0,0.1)] border border-gray-100 rounded-sm text-xs cursor-default"
+                  className="px-6 py-1 bg-white shadow-[0_0_4px_rgba(0,0,0,0.1)] border border-gray-100 rounded-sm text-xs cursor-pointer"
+                //   onClick={() => {
+                //     const find = 
+                //   }}
                 >
                   {country}
                 </span>
