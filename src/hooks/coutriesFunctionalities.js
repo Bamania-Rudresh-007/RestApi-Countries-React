@@ -10,16 +10,28 @@ function useCountriesFunctionalities(){
 
 
     const handleClick = (country) => {
-        // const targettedCountry = countries.filter((ele) => ele.name.common != country.name.common) 
-        // navigate("/detail")
-        // console.log(targettedCountry)
-        // console.log("Filtered list:", targettedCountry);
         const API = `https://restcountries.com/v3.1/name/${country.name.common}`;
 
-        fetch(API).then((res) => res.json()).then((data) => {
-            console.log(data);
+        fetch(API).then((res) => res.json()).then((result) => {
+            const data = result[0];
+            navigate("/detail", {
+                state: {
+                    flag: data.flags.svg,
+                    alt: data.flags.alt,
+                    name: data.name.common,
+                    nativename: data.name.nativeName,
+                    population: data.population,
+                    region: data.region,
+                    subRegion: data.subregion,
+                    capital: data.capital,
+                    topLevelDomain: data.tld,
+                    currencies: data.currencies,
+                    languages: data.languages,
+                    borderCountries: data.borders
+
+                }
+            })
         })
-        console.log(country)
     }
     return {handleClick}
 }
