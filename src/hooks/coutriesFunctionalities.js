@@ -47,20 +47,32 @@ function useCountriesFunctionalities(){
         languages: country.languages,
     })
     
-    let arr = [];
+    let searchedCountries = [];
+    let filterRegion = [];
 
     const handleSearchByCountryName = (searchName) => {
-        arr = []
+        searchedCountries = []
         countries.map((ele) => {
             if(ele.name.common.toLowerCase().includes(searchName.toLowerCase())){
-                arr.push(ele);
+                searchedCountries.push(ele);
             }
        })
-       console.log(arr)
-       setCountries(arr);
+    //    console.log(arr)
+       setCountries(searchedCountries);
     }
 
-    return {handleClick, handleSearchByCountryName}
+    const handleFilterByRegion = (region) => {
+        filterRegion = [];
+        countries.map((ele) => {
+            if(ele.region.toLowerCase() == region.toLowerCase()){
+                filterRegion.push(ele)
+            }
+        })
+        setCountries(filterRegion)
+    }
+
+
+    return {handleClick, handleSearchByCountryName, handleFilterByRegion}
 }
 
 export default useCountriesFunctionalities;
