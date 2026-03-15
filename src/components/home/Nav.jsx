@@ -10,7 +10,7 @@ function Nav() {
   </div>
   
   <div>
-    <button className="flex items-center gap-2 text-sm font-semibold sm:text-lg">
+    <button className="flex items-center gap-2 text-sm font-semibold sm:text-lg cursor-pointer">
       <FaMoon className="text-xs sm:text-base" />
       <span>Dark Mode</span>
     </button>

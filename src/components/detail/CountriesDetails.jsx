@@ -4,7 +4,7 @@ import useCountriesFunctionalities from '../../hooks/coutriesFunctionalities';
 import { useCountries } from '../../CountryContext/countrycontext';
 
 const CountryDetail = () => {
-    const {countries, extender} = useCountries()
+    const {extender} = useCountries()
 
     const location = useLocation()
     const navigate = useNavigate()

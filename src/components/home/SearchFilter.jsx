@@ -1,9 +1,6 @@
 import { FaSearch } from "react-icons/fa";
 import useCountriesFunctionalities from "../../hooks/coutriesFunctionalities";;
-import { useCountries } from "../../CountryContext/countrycontext";
-import { useState, useEffect } from "react";
 function SearchFilter() {
-    const {countries, extender, setExtender} = useCountries()
     const {handleSearchByCountryName, handleFilterByRegion} = useCountriesFunctionalities();
 
     const handleChange = (e) => {
@@ -13,7 +10,7 @@ function SearchFilter() {
 
   return (
     <div className='flex flex-col gap-4 px-4 py-7 sm:flex-row sm:justify-between sm:items-center sm:px-15'>
-        <div className="max-w-md"> {/* Container to control width */}
+        <div className="max-w-md"> 
             <div className="flex items-center gap-3 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500 bg-white">
                 <FaSearch className="text-gray-400" /> 
                 <input 

@@ -2,7 +2,7 @@ import { useCountries } from '../../CountryContext/countrycontext'
 import useCountriesFunctionalities from '../../hooks/coutriesFunctionalities';
 
 function Cards() {
-    const {countries, extender} = useCountries()
+    const {extender} = useCountries()
     const {handleClick} = useCountriesFunctionalities()
   return (
         <div className=''>

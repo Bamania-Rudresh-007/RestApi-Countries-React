@@ -1,4 +1,3 @@
-import React from 'react'
 import CountryDetail from './CountriesDetails'
 import Navbar from './Nav.detail'
 

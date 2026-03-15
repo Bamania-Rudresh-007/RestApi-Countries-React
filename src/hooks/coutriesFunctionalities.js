@@ -3,12 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 function useCountriesFunctionalities(){
 
-    const {countries, setCountries, setLoading, extender,setExtender} = useCountries()
+    const {countries, extender,setExtender} = useCountries()
 
     const navigate = useNavigate();
 
 
-    // In handleClick - fetch border names by codes
     const handleClick = (country) => {
         if (country.borders?.length > 0) {
             const codes = country.borders.join(',');
@@ -60,7 +59,6 @@ function useCountriesFunctionalities(){
     }
 
     const handleFilterByRegion =  (region) => {
-        //  setExtender(countries)
         console.log(countries)
         console.log(region)
         filterRegion = [];
@@ -70,15 +68,6 @@ function useCountriesFunctionalities(){
             }
         })
         if(region.toLowerCase() == "none"){
-            // const API = "https://restcountries.com/v3.1/all?fields=name,capital,region,subregion,flags,currencies,languages,population,borders,tld";
-
-            // fetch(API)
-            //     .then((res) => res.json())
-            //     .then((data) => {
-            //         setExtender(data);
-            //         setLoading(false);
-            // })
-            // .catch((err) => console.error("Error fetching countries:", err));
             setExtender(countries);
             return;
         }
