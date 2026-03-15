@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function useCountriesFunctionalities(){
 
-    const {countries, setCountries} = useCountries()
+    const {countries, setCountries, setLoading, extender,setExtender} = useCountries()
 
     const navigate = useNavigate();
 
@@ -15,7 +15,6 @@ function useCountriesFunctionalities(){
             fetch(`https://restcountries.com/v3.1/alpha?codes=${codes}&fields=name,cca3`)
                 .then(res => res.json())
                 .then(borderData => {
-                    console.log(borderData)
                     navigate("/detail", {
                         state: {
                             ...buildState(country),
@@ -52,25 +51,39 @@ function useCountriesFunctionalities(){
 
     const handleSearchByCountryName = (searchName) => {
         searchedCountries = []
-        countries.map((ele) => {
+        extender.map((ele) => {
             if(ele.name.common.toLowerCase().includes(searchName.toLowerCase())){
                 searchedCountries.push(ele);
             }
        })
-    //    console.log(arr)
-       setCountries(searchedCountries);
+       setExtender(searchedCountries);
     }
 
-    const handleFilterByRegion = (region) => {
+    const handleFilterByRegion =  (region) => {
+        //  setExtender(countries)
+        console.log(countries)
+        console.log(region)
         filterRegion = [];
         countries.map((ele) => {
             if(ele.region.toLowerCase() == region.toLowerCase()){
                 filterRegion.push(ele)
             }
         })
-        setCountries(filterRegion)
-    }
+        if(region.toLowerCase() == "none"){
+            // const API = "https://restcountries.com/v3.1/all?fields=name,capital,region,subregion,flags,currencies,languages,population,borders,tld";
 
+            // fetch(API)
+            //     .then((res) => res.json())
+            //     .then((data) => {
+            //         setExtender(data);
+            //         setLoading(false);
+            // })
+            // .catch((err) => console.error("Error fetching countries:", err));
+            setExtender(countries);
+            return;
+        }
+        setExtender(filterRegion)
+    }
 
     return {handleClick, handleSearchByCountryName, handleFilterByRegion}
 }

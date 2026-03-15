@@ -4,7 +4,7 @@ import useCountriesFunctionalities from '../../hooks/coutriesFunctionalities';
 import { useCountries } from '../../CountryContext/countrycontext';
 
 const CountryDetail = () => {
-    const {countries} = useCountries()
+    const {countries, extender} = useCountries()
 
     const location = useLocation()
     const navigate = useNavigate()
@@ -68,7 +68,7 @@ const CountryDetail = () => {
                   key={country} 
                   className="px-6 py-1 bg-white shadow-[0_0_4px_rgba(0,0,0,0.1)] border border-gray-100 rounded-sm text-xs cursor-pointer"
                   onClick={() => {
-                    const pickborder = countries.find((element) => element.name.common === country)
+                    const pickborder = extender.find((element) => element.name.common === country)
                     handleClick(pickborder)
                   }}
                 >

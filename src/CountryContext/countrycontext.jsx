@@ -1,16 +1,12 @@
 import { createContext, useState, useEffect, useContext } from "react";
 
-
 const CountryContext = createContext();
 
 
 export function CountryProvider({ children }) {
     const [countries, setCountries] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        console.log(countries)
-    }, [countries])
+    const [extender, setExtender] = useState([]);
 
     const API = "https://restcountries.com/v3.1/all?fields=name,capital,region,subregion,flags,currencies,languages,population,borders,tld";
     useEffect(() => {
@@ -18,6 +14,7 @@ export function CountryProvider({ children }) {
         fetch(API)
             .then((res) => res.json())
             .then((data) => {
+                setExtender(data);
                 setCountries(data);
                 setLoading(false);
             })
@@ -28,6 +25,9 @@ export function CountryProvider({ children }) {
         countries,
         setCountries,
         loading,
+        setLoading,
+        extender,
+        setExtender
     };
 
     return (

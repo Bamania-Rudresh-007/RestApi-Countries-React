@@ -2,13 +2,13 @@ import { useCountries } from '../../CountryContext/countrycontext'
 import useCountriesFunctionalities from '../../hooks/coutriesFunctionalities';
 
 function Cards() {
-    const {countries} = useCountries()
+    const {countries, extender} = useCountries()
     const {handleClick} = useCountriesFunctionalities()
   return (
         <div className=''>
             <div className="p-8 bg-gray-50 min-h-screen">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
-                    {countries.map((country) => (
+                    {extender.map((country) => (
                     <div 
                         key={country.name.common} 
                         className="bg-white shadow-lg shadow-gray-200 rounded-md overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
