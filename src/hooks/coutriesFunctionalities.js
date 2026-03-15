@@ -1,9 +1,10 @@
-import { useCountries } from "../CountryContext/countrycontext"
+import { useCountries } from "../CountryContext/countrycontext";
 import { useNavigate } from "react-router-dom";
 
 function useCountriesFunctionalities(){
 
-    const {countries} = useCountries()
+    const {countries, setCountries} = useCountries()
+
     const navigate = useNavigate();
 
 
@@ -45,8 +46,21 @@ function useCountriesFunctionalities(){
         currencies: country.currencies,
         languages: country.languages,
     })
+    
+    let arr = [];
 
-    return {handleClick}
+    const handleSearchByCountryName = (searchName) => {
+        arr = []
+        countries.map((ele) => {
+            if(ele.name.common.toLowerCase().includes(searchName.toLowerCase())){
+                arr.push(ele);
+            }
+       })
+       console.log(arr)
+       setCountries(arr);
+    }
+
+    return {handleClick, handleSearchByCountryName}
 }
 
 export default useCountriesFunctionalities;

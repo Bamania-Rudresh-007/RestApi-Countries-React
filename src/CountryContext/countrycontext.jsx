@@ -8,6 +8,10 @@ export function CountryProvider({ children }) {
     const [countries, setCountries] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        console.log(countries)
+    }, [countries])
+
     const API = "https://restcountries.com/v3.1/all?fields=name,capital,region,subregion,flags,currencies,languages,population,borders,tld";
     useEffect(() => {
        
@@ -23,7 +27,7 @@ export function CountryProvider({ children }) {
     const value = {
         countries,
         setCountries,
-        loading
+        loading,
     };
 
     return (

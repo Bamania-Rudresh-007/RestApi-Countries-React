@@ -1,13 +1,11 @@
-import React from 'react'
-import Home from './components/home/Home';
-import CountriesDetail from './components/detail/CountriesDetails';
+import Home from './components/home/Home.jsx';
 
 function App() {
-  return (
-    <div>
-        <Home />
-    </div>
-  ) 
+    return (
+        <div>
+            <Home />
+        </div>
+    );
 }
 
-export default App
+export default App;

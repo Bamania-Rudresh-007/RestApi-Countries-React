@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from "react-icons/fa"
 import useCountriesFunctionalities from '../../hooks/coutriesFunctionalities';

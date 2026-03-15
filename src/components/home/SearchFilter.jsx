@@ -1,6 +1,13 @@
-import React from 'react'
-import { FaSearch } from "react-icons/fa"
+import { FaSearch } from "react-icons/fa";
+import useCountriesFunctionalities from "../../hooks/coutriesFunctionalities";;
+
 function SearchFilter() {
+    const {handleSearchByCountryName} = useCountriesFunctionalities();
+
+    const handleChange = (e) => {
+        handleSearchByCountryName(e)
+    }
+
   return (
     <div className='flex justify-between items-center px-15 py-7 '>
         <div className="max-w-md"> {/* Container to control width */}
@@ -10,6 +17,7 @@ function SearchFilter() {
                 type="text" 
                 placeholder="Search for country" 
                 className="w-full focus:outline-none text-gray-900 bg-transparent"
+                onChange={(e) => handleChange(e.target.value)}
                 />
             </div>
         </div>
