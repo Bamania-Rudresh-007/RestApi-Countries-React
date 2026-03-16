@@ -7,6 +7,24 @@ export function CountryProvider({ children }) {
     const [countries, setCountries] = useState([]);
     const [loading, setLoading] = useState(true);
     const [extender, setExtender] = useState([]);
+    const [theme, setTheme] = useState(() => {
+        try {
+            const currentTheme = JSON.parse(localStorage.getItem("theme"));
+
+            return currentTheme ? currentTheme : "Light";
+        } catch (error) {
+            console.error("Failed to fetched  theme data from local storage: ", error);
+        }
+    })
+
+    useEffect(() => {
+        if(theme == "Dark"){
+            localStorage.setItem("theme", JSON.stringify("Dark"))
+        }
+        else{
+            localStorage.setItem("theme", JSON.stringify("Light"))
+        }
+    }, [theme])
 
     const API = "https://restcountries.com/v3.1/all?fields=name,capital,region,subregion,flags,currencies,languages,population,borders,tld";
     useEffect(() => {
@@ -27,7 +45,9 @@ export function CountryProvider({ children }) {
         loading,
         setLoading,
         extender,
-        setExtender
+        setExtender,
+        theme,
+        setTheme
     };
 
     return (

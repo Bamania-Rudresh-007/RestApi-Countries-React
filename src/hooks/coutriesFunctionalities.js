@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function useCountriesFunctionalities(){
 
-    const {countries, extender,setExtender} = useCountries()
+    const {countries, setExtender} = useCountries()
 
     const navigate = useNavigate();
 
@@ -45,17 +45,13 @@ function useCountriesFunctionalities(){
         languages: country.languages,
     })
     
-    // let filterRegion = [];
-
     const handleSearchByCountryName = (searchName) => {
         const searchedResult = countries.filter((ele) => ele.name.common.toLowerCase().includes(searchName.toLowerCase()))
        setExtender(searchedResult);
     }
 
     const handleFilterByRegion =  (region) => {
-        // console.log(countries)
-        // console.log(region)
-        // filterRegion = [];
+
         const filteredRegionResult = countries.filter((ele) => ele.region.toLowerCase() == region.toLowerCase())
 
         if(region.toLowerCase() == "none"){

@@ -4,34 +4,39 @@ import useCountriesFunctionalities from '../../hooks/coutriesFunctionalities';
 import { useCountries } from '../../CountryContext/countrycontext';
 
 const CountryDetail = () => {
-    const {extender} = useCountries()
+    const { extender, theme } = useCountries();
+    const isDark = theme === "Dark";
 
-    const location = useLocation()
-    const navigate = useNavigate()
-    const {flag,alt,name,nativename,population,region,subRegion,capital,topLevelDomain,currencies,languages, borderCountries} = location.state
+    const location = useLocation();
+    const navigate = useNavigate();
+    const {flag, alt, name, nativename, population, region, subRegion, capital, topLevelDomain, currencies, languages, borderCountries} = location.state;
 
     const nativeName = Object.values(nativename || {})[0]?.common;
     const currencyList = Object.values(currencies || {}).map(c => c.name).join(', ');
     const languageList = Object.values(languages || {}).join(', ');
     
-    const {handleClick} = useCountriesFunctionalities()
+    const { handleClick } = useCountriesFunctionalities();
 
   return (
-    <div className="bg-white min-h-screen text-gray-900 px-10 py-12 font-sans">
+    <div className={`min-h-screen px-10 py-12 font-sans transition-colors duration-300 
+      ${isDark ? 'bg-[#202c37] text-white' : 'bg-white text-gray-900'}`}>
+      
       {/* Back Button */}
-      <button className="mb-16 px-8 py-2 bg-white shadow-[0_0_7px_rgba(0,0,0,0.2)] rounded-md flex items-center gap-2 hover:bg-gray-50 transition-colors cursor-pointer"
-      onClick={() => navigate(-1)}
+      <button 
+        className={`mb-16 px-8 py-2 rounded-md flex items-center gap-2 transition-all cursor-pointer shadow-md
+          ${isDark ? 'bg-[#2b3945] hover:bg-[#334455] text-white shadow-black/40' : 'bg-white hover:bg-gray-50 text-gray-900 shadow-gray-200'}`}
+        onClick={() => navigate(-1)}
       >
-        <span className="text-xl "><FaArrowLeft /></span> Back
+        <FaArrowLeft className="text-sm" /> Back
       </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
         {/* Flag Section */}
-        <div className="w-full max-w-xl">
+        <div className="w-full">
           <img 
             src={flag} 
             alt={alt} 
-            className="w-full h-auto shadow-md rounded-sm"
+            className="w-full h-auto shadow-lg rounded-sm"
           />
         </div>
 
@@ -43,7 +48,7 @@ const CountryDetail = () => {
             {/* Left Stats */}
             <div className="space-y-3">
               <p><span className="font-semibold">Native Name:</span> {nativeName}</p>
-              <p><span className="font-semibold">Population:</span> {population}</p>
+              <p><span className="font-semibold">Population:</span> {population?.toLocaleString()}</p>
               <p><span className="font-semibold">Region:</span> {region}</p>
               <p><span className="font-semibold">Sub Region:</span> {subRegion} </p>
               <p><span className="font-semibold">Capital:</span> {capital}</p>
@@ -51,10 +56,10 @@ const CountryDetail = () => {
 
             {/* Right Stats */}
             <div className="space-y-3">
-              <p><span className="font-semibold">Top Level Domain:</span>{topLevelDomain}</p>
-              <p><span className="font-semibold">Currencies:</span>{currencyList}</p>
+              <p><span className="font-semibold">Top Level Domain:</span> {topLevelDomain}</p>
+              <p><span className="font-semibold">Currencies:</span> {currencyList}</p>
               <p className="leading-relaxed">
-                <span className="font-semibold">Languages:</span>{languageList}
+                <span className="font-semibold">Languages:</span> {languageList}
               </p>
             </div>
           </div>
@@ -63,20 +68,25 @@ const CountryDetail = () => {
           <div className="flex flex-col xl:flex-row xl:items-center gap-4 text-sm">
             <h3 className="font-semibold whitespace-nowrap">Border Countries:</h3>
             <div className="flex flex-wrap gap-2">
-              {borderCountries ? borderCountries.map((country) => (
-                <span 
-                  key={country} 
-                  className="px-6 py-1 bg-white shadow-[0_0_4px_rgba(0,0,0,0.1)] border border-gray-100 rounded-sm text-xs cursor-pointer"
-                  onClick={() => {
-                    const pickborder = extender.find((element) => element.name.common === country)
-                    handleClick(pickborder)
-                  }}
-                >
-                  {country}
+              {borderCountries && borderCountries.length > 0 ? (
+                borderCountries.map((country) => (
+                  <span 
+                    key={country} 
+                    className={`px-6 py-1 rounded-sm text-xs cursor-pointer shadow-sm transition-colors
+                      ${isDark ? 'bg-[#2b3945] hover:bg-[#334455] text-white shadow-black/40' : 'bg-white border border-gray-100 hover:bg-gray-50'}`}
+                    onClick={() => {
+                      const pickborder = extender.find((element) => element.name.common === country)
+                      handleClick(pickborder)
+                    }}
+                  >
+                    {country}
+                  </span>
+                ))
+              ) : (
+                <span className={`px-6 py-1 rounded-sm text-xs opacity-60 ${isDark ? 'bg-[#2b3945]' : 'bg-gray-100'}`}>
+                  None
                 </span>
-              )) : <span 
-                  className="px-6 py-1 bg-white shadow-[0_0_4px_rgba(0,0,0,0.1)] border border-gray-100 rounded-sm text-xs cursor-default"
-                >No border Countries</span>}
+              )}
             </div>
           </div>
         </div>
