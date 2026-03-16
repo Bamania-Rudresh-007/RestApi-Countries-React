@@ -34,9 +34,15 @@ export function CountryProvider({ children }) {
             .then((data) => {
                 setExtender(data);
                 setCountries(data);
-                setLoading(false);
+
+                setTimeout(() => {
+                    setLoading(false);
+                }, 800);
+
+                // setLoading(false);
             })
-            .catch((err) => console.error("Error fetching countries:", err));
+            .catch((err) => console.error("Error fetching countries:", err))
+            // .finally(() => setLoading(false)); 
     }, []); 
 
     const value = {
