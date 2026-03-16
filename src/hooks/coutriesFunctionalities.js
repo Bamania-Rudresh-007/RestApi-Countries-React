@@ -45,17 +45,11 @@ function useCountriesFunctionalities(){
         languages: country.languages,
     })
     
-    let searchedCountries = [];
     let filterRegion = [];
 
     const handleSearchByCountryName = (searchName) => {
-        searchedCountries = []
-        extender.map((ele) => {
-            if(ele.name.common.toLowerCase().includes(searchName.toLowerCase())){
-                searchedCountries.push(ele);
-            }
-       })
-       setExtender(searchedCountries);
+        const searchedResult = countries.filter((ele) => ele.name.common.toLowerCase().includes(searchName.toLowerCase()))
+       setExtender(searchedResult);
     }
 
     const handleFilterByRegion =  (region) => {
